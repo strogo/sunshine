@@ -1,0 +1,2 @@
+osm2geojson==0.1.28
+georasters==0.5.20

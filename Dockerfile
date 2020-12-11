@@ -3,3 +3,4 @@ ADD .devcontainer /.devcontainer
 RUN apt-get update && apt-get install -y unzip build-essential wget virtualenv libspatialindex-dev python-rtree git
 RUN pip install --upgrade pip
 RUN pip install -r ./.devcontainer/requirements.dev.txt
+RUN ./.devcontainer/install.sh

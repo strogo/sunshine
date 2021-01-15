@@ -28,8 +28,8 @@ $(process_dir_dem)/dem.tiff $(process_dir_dem)/dem_sunshine.tiff: $(demzip)
 	unzip -o $(demzip) -d $(process_dir_dem)/.tmp
 	gdal_merge.py -o $(process_dir_dem)/.tmp/merged.tiff $(process_dir_dem)/.tmp/*/*.hgt
 	gdal_translate -projwin $(clip) -of GTiff $(process_dir_dem)/.tmp/merged.tiff $(process_dir_dem)/.tmp/clipped.tiff
-	gdalwarp -t_srs $(proj) -tr $(resolution) $(resolution) -r cubicspline -multi -of GTiff $(process_dir_dem)/.tmp/clipped.tiff $(process_dir_dem)/dem.tiff
-	gdalwarp -t_srs $(proj) -tr $(sunshine_resolution) $(sunshine_resolution) -r cubicspline -multi -of GTiff $(process_dir_dem)/.tmp/clipped.tiff $(process_dir_dem)/dem_sunshine.tiff
+	gdalwarp -t_srs $(proj) -tr $(resolution) $(resolution) -r cubicspline -multi -ot Float32 -of GTiff $(process_dir_dem)/.tmp/clipped.tiff $(process_dir_dem)/dem.tiff
+	gdalwarp -t_srs $(proj) -tr $(sunshine_resolution) $(sunshine_resolution) -r cubicspline -multi -ot Float32 -of GTiff $(process_dir_dem)/.tmp/clipped.tiff $(process_dir_dem)/dem_sunshine.tiff
 	rm -rf $(process_dir_dem)/.tmp
 
 $(process_dir_dem)/contour.shp: $(process_dir_dem)/dem.tiff

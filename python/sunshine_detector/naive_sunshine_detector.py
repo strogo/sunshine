@@ -86,19 +86,6 @@ class NaiveSunshineDetector:
         # log.info(f"Asking for sun position for {real_ts}")
         return self.get_sun_position_base(real_ts)
 
-        """
-        point = ephem.Observer()
-        (x, y) = self.proj_transform.transform(lat, lng)
-        point.lon = str(x)
-        point.lat = str(y)
-        point.elevation = self.get_elevation(lng, lat) or 0
-        point.date = ts
-        sun = ephem.Sun(point)
-        azimuth = sun.az + self.projection_offset
-        xyz_vector = (math.sin(azimuth), math.cos(azimuth), math.sin(sun.alt))
-        return xyz_vector
-        """
-
     # @lru_cache(maxsize=10000)
     def is_sunny(self, lng: float, lat: float, ts: datetime) -> bool:
         xyz_vector = self.get_sun_position(lng, lat, ts)
